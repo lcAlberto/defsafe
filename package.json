@@ -11,16 +11,17 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.1",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@nuxt/eslint-config": "^0.1.1",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
-    "eslint-plugin-vue": "9.21.1",
-    "@nuxt/eslint-config": "^0.1.1",
-    "eslint": "^8.36.0"
+    "eslint": "^8.36.0",
+    "eslint-plugin-vue": "9.21.1"
   },
   "overrides": {
     "vue": "latest"
