@@ -32,12 +32,16 @@
                 </span>
                 <input
                   v-model="form.fullName"
+                  :class="{ 'is-invalid': errors.fullName }"
                   class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Enter your full name"
                   type="text"
                 >
-                <span class="label">
-                  <span class="label-text-alt text-red-500">Bottom Right label</span>
+                <span
+                  v-if="errors.fullName"
+                  class="label"
+                >
+                  <span class="label-text-alt text-red-500">{{ errors.fullName }}</span>
                 </span>
               </label>
               <!--              email-->
@@ -47,12 +51,16 @@
                 </span>
                 <input
                   v-model="form.email"
+                  :class="{ 'is-invalid': errors.email }"
                   class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Enter your email"
                   type="email"
                 >
-                <span class="label">
-                  <span class="label-text-alt text-red-500">Bottom Right label</span>
+                <span
+                  v-if="errors.email"
+                  class="label"
+                >
+                  <span class="label-text-alt text-red-500">{{ errors.email }}</span>
                 </span>
               </label>
               <!--              phone-->
@@ -62,12 +70,16 @@
                 </span>
                 <input
                   v-model="form.phone"
+                  :class="{ 'is-invalid': errors.phone }"
                   class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Enter your phone"
                   type="email"
                 >
-                <span class="label">
-                  <span class="label-text-alt text-red-500">Bottom Right label</span>
+                <span
+                  v-if="errors.phone"
+                  class="label"
+                >
+                  <span class="label-text-alt text-red-500">{{ erros.phone }}l</span>
                 </span>
               </label>
               <!--              reason-->
@@ -77,13 +89,17 @@
                 </span>
                 <textarea
                   v-model="form.reason"
+                  :class="{ 'is-invalid': errors.reason }"
                   class="textarea w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Write here..."
                   rows="5"
                   type="email"
                 />
-                <span class="label">
-                  <span class="label-text-alt text-red-500">Bottom Right label</span>
+                <span
+                  v-if="errors.reason"
+                  class="label"
+                >
+                  <span class="label-text-alt text-red-500">{{ errors.reason }}</span>
                 </span>
               </label>
               <!--              term-->
@@ -97,6 +113,12 @@
                   >
                   <span class="label-text">I agree to take care of this cat</span>
                 </label>
+                <small
+                  v-if="errors.terms"
+                  class="text-red-500"
+                >
+                  {{ errors.terms }}
+                </small>
               </div>
             </div>
             <div class="modal-action">
@@ -120,6 +142,8 @@
   </div>
 </template>
 <script setup>
+import {z} from 'zod'
+
 const props = defineProps({
   index: {type: Number, required: true},
 })
@@ -131,16 +155,65 @@ const form = ref({
   phone: '',
   reason: '',
   terms: false,
-
 })
+const errors = ref({
+  fullName: '',
+  email: '',
+  phone: '',
+  reason: '',
+  terms: '',
+});
+
+const schema = z.object({
+  fullName: z.string({
+    required_error: "Full Name is required",
+    invalid_type_error: "Full Name must be a string",
+  }).min(5, {message: 'Full name must contain at least 5 characters'}),
+  email: z.string({
+    required_error: "Email is required",
+    invalid_type_error: "Email must be a string",
+  }).email('Invalid email address'),
+  phone: z.string({
+    invalid_type_error: "Telephone must be a string",
+  }).optional(),
+  reason: z.string({
+    required_error: "Reason is required",
+    invalid_type_error: "Reason must be a string",
+  }),
+  terms: z.boolean().refine(value => value === true, 'You must agree to the terms'),
+});
 
 function toggleModal() {
   open.value = !open.value
   document.getElementById(`${props.index}-cat`).showModal();
 }
 
+function validateForm() {
+  errors.value = {
+    fullName: '',
+    email: '',
+    phone: '',
+    reason: '',
+    terms: '',
+  }
+  try {
+    schema.parse(form.value);
+    return true;
+  } catch (e) {
+    if (e.errors) {
+      e.errors.forEach(error => {
+        errors.value[error.path[0]] = error.message;
+      });
+    }
+    return false;
+  }
+}
+
 function submit() {
-  console.log(form.value);
+  if (validateForm()) {
+    console.log(form.value);
+    // Envie o formulário para o backend aqui
+  }
 }
 </script>
 
