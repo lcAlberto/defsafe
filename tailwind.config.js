@@ -11,6 +11,55 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: [
+      {
+        my: {
+          "primary": "#4E2096",
+          "primary-content": "#c8d0d0",
+          "secondary": "#4d4e4e",
+          "secondary-content": "#FFFFFF",
+          "accent": "#023536",
+          "accent-content": "#cad3d3",
+          "neutral": "#10171f",
+          "neutral-content": "#c9cbcd",
+          "base-100": "#f8f8f8",
+          "base-200": "#DFE4E8", // stroke
+          "base-300": "#B2B2B2", // placeholderDFE4E8FF
+          "base-content": "#161514",
+          "info": "#0074c3",
+          "info-content": "#d2e3f5",
+          "success": "#08D58B",
+          "success-content": "#0b1100",
+          "warning": "#fcd34d",
+          "warning-content": "#161002",
+          "error": "#E03131",
+          "error-content": "#150406",
+        },
+        dark: {
+          "primary": "#4E2096",
+          "primary-content": "#c8d0d0",
+          "secondary": "#4d4e4e",
+          "secondary-content": "#FFFFFF",
+          "accent": "#023536",
+          "accent-content": "#cad3d3",
+          "neutral": "#10171f",
+          "neutral-content": "#c9cbcd",
+          "base-100": "#161514",
+          "base-200": "#d2bd9e",
+          "base-300": "#cab48f",
+          "base-content": "#161514",
+          "info": "#0074c3",
+          "info-content": "#d2e3f5",
+          "success": "#08D58B",
+          "success-content": "#0b1100",
+          "warning": "#fcd34d",
+          "warning-content": "#161002",
+          "error": "#E03131",
+          "error-content": "#150406",
+        },
+      },
+    ],
+  },
 }
-
