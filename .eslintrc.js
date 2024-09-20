@@ -16,7 +16,14 @@ module.exports = {
   ],
   'ignorePatterns': ['node_modules/', 'dist/', '.nuxt/', '.output/'],
   'rules': {
-    'vue/html-indent': ['error', 2],
+    'vue/html-comment-indent': ['error', 0],
+    'vue/html-indent': ['error', 2, {
+      'attribute': 1,
+      'baseIndent': 1,
+      'closeBracket': 0,
+      'alignAttributesVertically': true,
+      'ignores': [],
+    }],
     'vue/no-v-html': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/require-prop-types': 'off',
@@ -25,7 +32,7 @@ module.exports = {
     'eslint-disable-next-line': 'off',
     'vue/max-attributes-per-line': ['error', {
       'singleline': {
-        'max': 3,
+        'max': 1,
       },
       'multiline': {
         'max': 1,
@@ -39,7 +46,7 @@ module.exports = {
       'before': false,
       'after': true,
     }],
-    'comma-style': [2, 'last'],
+    'comma-style': ['single', 'last'],
     'indent': [2, 2, {
       'SwitchCase': 1,
     }],
@@ -47,4 +54,4 @@ module.exports = {
     'no-multiple-empty-lines': ['error', { 'max': 1, 'maxEOF': 0 }],
     'vue/no-dupe-keys': ['error'],
   },
-}
+};

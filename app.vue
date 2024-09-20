@@ -1,23 +1,25 @@
 <template>
   <div>
-    <button @click="manda()">oi</button>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
 
 <script setup lang="ts">
 
-const { $db } = useNuxtApp()
+// const { $db } = useNuxtApp()
 
 // const teste = await $db.from("cats").select()
 
 
-async function manda() {
-  let { data, error } = await $db.auth.signInWithOtp({
-    username: 'admin@email.com',
-    password: '12345678'
-  })
+// async function manda() {
+//   let { data, error } = await $db.auth.signInWithOtp({
+//     username: 'admin@email.com',
+//     password: '12345678'
+//   })
 
-  console.log(data);
-}
+//   console.log(data);
+// }
 
 </script>
