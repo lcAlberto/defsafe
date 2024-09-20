@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/fonts',
+    '@pinia/nuxt',
     'nuxt-phosphor-icons'
   ],
   css: [

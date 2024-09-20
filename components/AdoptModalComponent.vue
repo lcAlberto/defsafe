@@ -145,10 +145,13 @@
 <script setup>
 import {adoptionFormSchema} from '~/validations/AdoptionRequestSchemaValidation';
 import {vMaska} from "maska/vue"
+import {useCatStore} from "~/stores/cats/catsStore";
 
 const props = defineProps({
   index: {type: Number, required: true},
 })
+
+const store = useCatStore()
 
 const open = ref(false)
 const form = ref({
@@ -194,8 +197,7 @@ function validateForm() {
 
 function submit() {
   if (validateForm()) {
-    console.log(form.value);
-    // Envie o formulário para o backend aqui
+    store.createCat(form.value)
   }
 }
 </script>

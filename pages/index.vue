@@ -20,7 +20,32 @@
           Explore our list of lovable cats looking for their forever homes.
         </p>
       </div>
+
       <div
+        v-if="loading"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrap justify-items-center items-center h-[80vh] overflow-auto md:pr-5"
+      >
+        <skeleton-component
+          v-for="item in 15"
+          :key="item"
+        />
+      </div>
+
+      <div
+        v-else-if="cats.length === 0"
+        class="flex flex-col justify-center items-center text-primary h-[50vh]"
+      >
+        <PhosphorIconPawPrint
+          :size="52"
+          weight="fill"
+        />
+        <h1 class="text-md">
+          Oops! No kittens found
+        </h1>
+      </div>
+
+      <div
+        v-else
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrap justify-items-center items-center h-[80vh] overflow-auto md:pr-5"
       >
         <div
@@ -28,7 +53,6 @@
           :key="index"
         >
           <div class="card bg-base-100 border border-base-200 h-[30rem] shadow-xl max-w-96">
-            <!-- <div class="card bg-base-100 w-80 h-[30rem] shadow-xl"> -->
             <div class="card-body max-w-96 p-5">
               <figure class="rounded-xl max-h-56">
                 <img
@@ -58,18 +82,18 @@
 >
 import AdoptModalComponent from "~/components/AdoptModalComponent.vue";
 import {PhCat} from "@phosphor-icons/vue";
-
-const {$db} = useNuxtApp()
-
-const cats = ref([])
+import {useCatStore} from "~/stores/cats/catsStore";
 
 onMounted(() => {
   loadCatList()
 })
 
+const store = useCatStore()
+const cats = computed(() => store.getCats);
+const loading = computed(() => store.getLoading('fetchingCats'));
+
 async function loadCatList() {
-  const {data, error} = await $db.from("cats").select()
-  cats.value = data
+  await store.fetchCats().then(() => console.log(cats))
 }
 
 definePageMeta({
