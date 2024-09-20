@@ -70,6 +70,7 @@
                 </span>
                 <input
                   v-model="form.phone"
+                  v-maska="'(##) # ####-####'"
                   :class="{ 'is-invalid': errors.phone }"
                   class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Enter your phone"
@@ -142,7 +143,8 @@
   </div>
 </template>
 <script setup>
-import {z} from 'zod'
+import {adoptionFormSchema} from '~/validations/AdoptionRequestSchemaValidation';
+import {vMaska} from "maska/vue"
 
 const props = defineProps({
   index: {type: Number, required: true},
@@ -164,25 +166,6 @@ const errors = ref({
   terms: '',
 });
 
-const schema = z.object({
-  fullName: z.string({
-    required_error: "Full Name is required",
-    invalid_type_error: "Full Name must be a string",
-  }).min(5, {message: 'Full name must contain at least 5 characters'}),
-  email: z.string({
-    required_error: "Email is required",
-    invalid_type_error: "Email must be a string",
-  }).email('Invalid email address'),
-  phone: z.string({
-    invalid_type_error: "Telephone must be a string",
-  }).optional(),
-  reason: z.string({
-    required_error: "Reason is required",
-    invalid_type_error: "Reason must be a string",
-  }),
-  terms: z.boolean().refine(value => value === true, 'You must agree to the terms'),
-});
-
 function toggleModal() {
   open.value = !open.value
   document.getElementById(`${props.index}-cat`).showModal();
@@ -197,7 +180,7 @@ function validateForm() {
     terms: '',
   }
   try {
-    schema.parse(form.value);
+    adoptionFormSchema.parse(form.value);
     return true;
   } catch (e) {
     if (e.errors) {
