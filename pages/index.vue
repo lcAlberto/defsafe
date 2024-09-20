@@ -19,9 +19,9 @@
       </p>
     </div>
     <hr>
-    <div>
+    <div class="px-5">
       <div class="py-5">
-        <h1 class="text-2xl text-primary">
+        <h1 class="text-2xl font-bold text-primary">
           Cats for adoption
         </h1>
         <p class="text-md">
@@ -29,25 +29,25 @@
         </p>
       </div>
       <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrap items-center h-[80vh] overflow-auto pr-5"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-wrap justify-items-center items-center h-[80vh] overflow-auto md:pr-5"
       >
         <div
           v-for="(cat, index) in cats"
           :key="index"
         >
-          <div class="card bg-base-100 border border-base-200 h-[30rem] shadow-xl">
+          <div class="card bg-base-100 border border-base-200 h-[30rem] shadow-xl max-w-96">
             <!-- <div class="card bg-base-100 w-80 h-[30rem] shadow-xl"> -->
             <div class="card-body max-w-96 p-5">
               <figure class="rounded-xl max-h-56">
                 <img
+                  :alt="`image-of-${cat.name}`"
                   :src="cat.image"
-                  alt="Shoes"
                 >
               </figure>
               <h2 class="card-title">
                 {{ cat.name }}
               </h2>
-              <p class="h-16 overflow-auto">
+              <p class="h-max-16 overflow-auto">
                 {{ cat.description }}
               </p>
               <div class="card-actions justify-center">
