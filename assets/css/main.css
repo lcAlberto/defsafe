@@ -5,3 +5,9 @@
 html {
     font-family: "Inter";
 }
+
+@layer components {
+    .is-invalid {
+        @apply border border-red-500 text-red-500 hover:text-red-700;
+    }
+}
