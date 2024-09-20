@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="manda()">oi</button>
   </div>
 </template>
 
@@ -7,7 +8,16 @@
 
 const { $db } = useNuxtApp()
 
-const teste = await $db.from("cats").select();
-console.log(teste);
+// const teste = await $db.from("cats").select()
+
+
+async function manda() {
+  let { data, error } = await $db.auth.signInWithOtp({
+    username: 'admin@email.com',
+    password: '12345678'
+  })
+
+  console.log(data);
+}
 
 </script>
