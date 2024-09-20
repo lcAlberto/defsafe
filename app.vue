@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-theme="my">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -11,8 +11,6 @@
 // const { $db } = useNuxtApp()
 
 // const teste = await $db.from("cats").select()
-
-
 // async function manda() {
 //   let { data, error } = await $db.auth.signInWithOtp({
 //     username: 'admin@email.com',

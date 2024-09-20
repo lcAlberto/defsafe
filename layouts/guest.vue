@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-screen mx-auto bg-base-200">
+    <div class="container h-screen mx-auto bg-base-100">
         <slot />
     </div>
 </template>
