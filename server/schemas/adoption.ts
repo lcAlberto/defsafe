@@ -1,10 +1,6 @@
-import {z} from 'zod';
+import {z} from 'zod'
 
-export const adoptionFormSchema = z.object({
-  cat_id: z.number({
-    required_error: "Cat id is required",
-    invalid_type_error: "Cat id must be a number",
-  }),
+export const createAdoptionCatSchema = z.object({
   full_name: z.string({
     required_error: "Full Name is required",
     invalid_type_error: "Full Name must be a string",
@@ -20,5 +16,4 @@ export const adoptionFormSchema = z.object({
     required_error: "Reason is required",
     invalid_type_error: "Reason must be a string",
   }).max(100, {message: 'The field cannot be longer than 100 characters'}),
-  terms: z.boolean().refine(value => value, 'You must agree to the terms'),
-});
+})
