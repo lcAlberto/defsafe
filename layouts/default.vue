@@ -1,8 +1,12 @@
 <template>
-    <div class="">
-    </div>
+  <div class="">
+    default!!!
+  </div>
 </template>
-<script lang="ts" setup>
+<script
+    lang="ts"
+    setup
+>
 
 
 </script>

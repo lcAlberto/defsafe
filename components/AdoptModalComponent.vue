@@ -1,6 +1,7 @@
 <template>
   <div class="w-full">
     <button
+      :disabled="props.isAdopted"
       class="btn w-full btn-primary"
       @click="toggleModal()"
     >
@@ -8,7 +9,7 @@
     </button>
     <div>
       <dialog
-        :id="`${props.index}-cat`"
+        :id="`${props.catId}-cat`"
         class="modal p-5"
       >
         <div class="modal-box w-full sm:w-11/12 md:w-1/2 xl:w-1/3 max-w-5xl">
@@ -31,17 +32,17 @@
                   <span class="label-text text-primary font-bold">Full name</span>
                 </span>
                 <input
-                  v-model="form.fullName"
-                  :class="{ 'is-invalid': errors.fullName }"
+                  v-model="form.full_name"
+                  :class="{ 'is-invalid': errors.full_name }"
                   class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
                   placeholder="Enter your full name"
                   type="text"
                 >
                 <span
-                  v-if="errors.fullName"
+                  v-if="errors.full_name"
                   class="label"
                 >
-                  <span class="label-text-alt text-red-500">{{ errors.fullName }}</span>
+                  <span class="label-text-alt text-red-500">{{ errors.full_name }}</span>
                 </span>
               </label>
               <!--              email-->
@@ -146,41 +147,49 @@
 import {adoptionFormSchema} from '~/validations/AdoptionRequestSchemaValidation';
 import {vMaska} from "maska/vue"
 import {useCatStore} from "~/stores/cats/catsStore";
+import {useAdoptionStore} from "~/stores/adoption/adoptionStore";
 
 const props = defineProps({
-  index: {type: Number, required: true},
+  catId: {type: Number, required: true},
+  isAdopted: {type: Boolean, default: false},
 })
 
-const store = useCatStore()
+const store = useAdoptionStore()
+const catStore = useCatStore()
 
 const open = ref(false)
 const form = ref({
-  fullName: '',
+  full_name: '',
   email: '',
   phone: '',
   reason: '',
   terms: false,
 })
 const errors = ref({
-  fullName: '',
+  full_name: '',
   email: '',
   phone: '',
   reason: '',
   terms: '',
+  cat_id: null,
 });
+
 
 function toggleModal() {
   open.value = !open.value
-  document.getElementById(`${props.index}-cat`).showModal();
+  document.getElementById(`${props.catId}-cat`).showModal();
+  if (props.catId)
+    form.value.cat_id = props.catId
 }
 
 function validateForm() {
   errors.value = {
-    fullName: '',
+    full_name: '',
     email: '',
     phone: '',
     reason: '',
     terms: '',
+    cat_id: null
   }
   try {
     adoptionFormSchema.parse(form.value);
@@ -197,7 +206,17 @@ function validateForm() {
 
 function submit() {
   if (validateForm()) {
-    store.createCat(form.value)
+    const param = {
+      full_name: form.value.full_name,
+      email: form.value.email,
+      phone: form.value.phone,
+      reason: form.value.reason,
+    }
+    store.adoptCat(param, props.catId).then(() => {
+      catStore.fetchCats()
+      open.value = false
+      document.getElementById(`${props.catId}-cat`).close();
+    })
   }
 }
 </script>

@@ -1,0 +1,31 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Cat {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+  image       String
+  adoptions   Adoption[]
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model Adoption {
+  id        Int    @id @default(autoincrement())
+  full_name String
+  email     String
+  phone     String
+  reason    String
+  cat_id    Int
+  cat       Cat   @relation(fields: [cat_id], references: [id])
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
