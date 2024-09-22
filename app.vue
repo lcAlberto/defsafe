@@ -1,12 +1,17 @@
 <template>
-  <div data-theme="my">
+  <div
+    data-theme="my"
+  >
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
 
-<script setup lang="ts">
+<script
+    lang="ts"
+    setup
+>
 
 // const { $db } = useNuxtApp()
 
