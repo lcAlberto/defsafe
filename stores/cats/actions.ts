@@ -1,5 +1,5 @@
 export const actions = {
-
+  
   async fetchCats() {
     await $fetch('http://localhost:3000/api/cats/cats-with-status', {
       method: 'GET'
@@ -9,26 +9,36 @@ export const actions = {
       this.error = error
     });
   },
-
-  // async oldWayfetchCats() {
-  //   console.log('fetchCats');
-  //
-  //   try {
-  //     const {$db} = useNuxtApp()
-  //     this.loading.fetchingCats = true
-  //     const {data, error} = await $db.from("cats").select()
-  //     this.cats.value = data
-  //     console.log(this.cats.value);
-  //
-  //     this.errors.value = error
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  //
-  //   this.loading.fetchingCats = false
-  // },
-
-  createCat(params: object) {
-    console.log(params)
+  
+  async createCat(params: object) {
+    await $fetch(`http://localhost:3000/api/cats/`, {
+      method: 'POST',
+      body: params
+    }).then((response) => {
+      this.fetchCats()
+    }).catch((error) => {
+      this.error = error
+    });
+  },
+  
+  async editCat(params: object, id: number) {
+    await $fetch(`http://localhost:3000/api/cats/${id}`, {
+      method: 'PUT',
+      body: params
+    }).then((response) => {
+      this.fetchCats()
+    }).catch((error) => {
+      this.error = error
+    });
+  },
+  
+  async deleteCat(id: number) {
+    await $fetch(`http://localhost:3000/api/cats/${id}`, {
+      method: 'DELETE'
+    }).then((response) => {
+      this.fetchCats()
+    }).catch((error) => {
+      this.error = error
+    });
   }
 }
