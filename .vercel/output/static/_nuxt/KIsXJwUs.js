@@ -1,0 +1,1 @@
+import{m as s,o as t,c as o,a,q as r}from"./DZUntpnH.js";import{_ as c}from"./DlAUqK2U.js";const n={class:"h-screen mx-auto bg-base-100"},_=s({__name:"guest",setup(d){return(e,l)=>(t(),o("div",null,[a("div",n,[r(e.$slots,"default",{},void 0,!0)])]))}}),u=c(_,[["__scopeId","data-v-00f5ef00"]]);export{u as default};
