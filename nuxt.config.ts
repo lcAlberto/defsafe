@@ -42,6 +42,11 @@ export default defineNuxtConfig({
       }
     },
   },
+  server: {
+    timing: {
+      total: true
+    }
+  },
   nitro: {
     preset: "vercel",
   },

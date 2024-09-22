@@ -4200,7 +4200,7 @@ const appConfig = defuFn(inlineAppConfig);
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "508fb009-640d-48d3-b26e-cc778dd90de6",
+    "buildId": "b098a0e0-2ddc-4a73-a240-c33bda639b5d",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": "",
     "databaseUrl": "postgresql://postgres.epcdznnjgjysgxdmulza:oyJmyxsVLc8tXLdW@aws-0-sa-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true",
