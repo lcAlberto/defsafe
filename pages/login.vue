@@ -29,30 +29,44 @@
             <span class="label-text text-primary font-bold">Full name</span>
           </span>
           <input
-            v-model="form.username"
-            :class="{ 'is-invalid': errors.username }"
+            v-model="form.email"
+            :class="{ 'is-invalid': errors.email }"
             class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
             placeholder="Enter your full name"
             type="text"
           >
           <span
-            v-if="errors.username"
+            v-if="errors.email"
             class="label"
           >
-            <span class="label-text-alt text-red-500">{{ errors.username }}</span>
+            <span class="label-text-alt text-red-500">{{ errors.email }}</span>
           </span>
         </label>
         <label class="form-control w-full my-5">
           <span class="label">
-            <span class="label-text text-primary font-bold">Full name</span>
+            <span class="label-text text-primary font-bold">Password</span>
           </span>
-          <input
-            v-model="form.password"
-            :class="{ 'is-invalid': errors.password }"
-            class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
-            placeholder="Enter your full name"
-            type="text"
-          >
+          <label class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300 flex items-center gap-2">
+            <input
+              v-model="form.password"
+              :class="{ 'is-invalid': errors.password }"
+              :type="showPassword ? 'text' : 'password'"
+              class="input border border-0 w-full"
+              placeholder="Enter your full name"
+            >
+            <PhosphorIconLockSimple
+              v-if="showPassword"
+              :size="24"
+              weight="fill"
+              @click="showPassword = false"
+            />
+            <PhosphorIconLockSimpleOpen
+              v-else
+              :size="24"
+              weight="fill"
+              @click="showPassword = true"
+            />
+          </label>
           <span
             v-if="errors.password"
             class="label"
@@ -67,6 +81,12 @@
           >
             Login
           </button>
+          <nuxt-link
+            class="btn btn-link btn-xs btn-block my-5"
+            to="/"
+          >
+            Voltar
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -82,19 +102,21 @@ import {useAuthStore} from "~/stores/auth/authStore";
 
 const store = useAuthStore()
 
+const showPassword = ref(false)
+
 const form = ref({
-  username: '',
+  email: '',
   password: ''
 })
 
 const errors = ref({
-  username: '',
+  email: '',
   password: ''
 })
 
 function validateForm() {
   errors.value = {
-    username: '',
+    email: '',
     password: '',
   }
   try {
@@ -110,13 +132,14 @@ function validateForm() {
   }
 }
 
-function submit() {
+async function submit() {
   if (validateForm()) {
     const param = {
-      username: form.value.username,
+      email: form.value.email,
       password: form.value.password
     }
-    store.login(param)
+    await store.login(param)
+    navigateTo('/cats')
   }
 }
 
