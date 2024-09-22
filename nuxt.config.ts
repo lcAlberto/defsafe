@@ -10,9 +10,6 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css',
   ],
-  phosphor: {
-    expose: true,
-  },
   postcss: {
     plugins: {
       tailwindcss: {},

@@ -1,9 +1,12 @@
 <template>
-  <div class="flex h-[91vh] w-full bg-pink-500">
+  <div class="flex h-full w-full bg-gray-100">
     <div class="hidden md:block">
       <sidebar-component />
     </div>
-    <navbar-component />
+    <main class="w-full">
+      <navbar-component />
+      <slot />
+    </main>
   </div>
 </template>
 <script

@@ -1,5 +1,6 @@
 <template>
   <div
+    class="h-[90vh]"
     data-theme="my"
   >
     <NuxtLayout>
