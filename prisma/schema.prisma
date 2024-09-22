@@ -1,11 +1,11 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Cat {
@@ -15,7 +15,7 @@ model Cat {
   image       String
   adoptions   Adoption[]
   created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  updated_at  DateTime @default(now())
 }
 
 model Adoption {
@@ -27,5 +27,5 @@ model Adoption {
   cat_id    Int
   cat       Cat   @relation(fields: [cat_id], references: [id])
   created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  updated_at  DateTime @default(now())
 }

@@ -6,6 +6,7 @@
           Card title!
         </h2>
         <div class="overflow-x-auto">
+          {{ cats }}
           <table class="table">
             <!-- head -->
             <thead>
@@ -60,7 +61,19 @@
     lang="ts"
     setup
 >
+import {useCatStore} from "~/stores/cats/catsStore";
 
+const store = useCatStore()
+const cats = computed(() => store.getCats);
+// const loading = computed(() => store.getLoading('fetchingCats'));
+
+onMounted(() => {
+  loadCats()
+})
+
+async function loadCats() {
+  await store.fetchCats()
+}
 </script>
 
 

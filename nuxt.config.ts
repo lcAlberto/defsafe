@@ -17,10 +17,16 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    public: {
+      // supabaseUrl: process.env.SUPABASE_URL,
+      // supabaseKey: process.env.SUPABASE_KEY,
+    },
     app: {
       databaseUrl: process.env.DATABASE_URL,
       directUrl: process.env.DIRECT_URL,
+      //
+      supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,
-    },
+    }
   },
 });

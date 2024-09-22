@@ -1,5 +1,5 @@
-import { EventHandlerRequest, H3Event, setResponseStatus, createError } from "h3";
-import { PrismaClient, Prisma } from "@prisma/client";
+import {EventHandlerRequest, H3Event, setResponseStatus, createError} from "h3";
+import {PrismaClient, Prisma} from "@prisma/client";
 
 export default defineEventHandler(async (event: H3Event<EventHandlerRequest>) => {
   const prisma = new PrismaClient()
