@@ -6,6 +6,7 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <notifications position="top right" />
   </div>
 </template>
 
@@ -13,17 +14,5 @@
     lang="ts"
     setup
 >
-
-// const { $db } = useNuxtApp()
-
-// const teste = await $db.from("cats").select()
-// async function manda() {
-//   let { data, error } = await $db.auth.signInWithOtp({
-//     username: 'admin@email.com',
-//     password: '12345678'
-//   })
-
-//   console.log(data);
-// }
-
+import {Notifications} from "@kyvg/vue3-notification";
 </script>

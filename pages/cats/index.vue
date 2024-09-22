@@ -2,7 +2,7 @@
   <div class="p-5">
     <div class="card bg-white border border-base-200 w-full">
       <div class="card-body">
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto !h-[72vh] overflow-auto pr-5 pb-5">
           <table class="table">
             <!-- head -->
             <thead>
@@ -46,6 +46,10 @@ onMounted(() => {
 async function loadCats() {
   await store.fetchCats()
 }
+
+definePageMeta({
+  middleware: 'auth'
+})
 </script>
 
 

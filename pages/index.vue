@@ -1,15 +1,27 @@
 <template>
   <div class="container">
     <div class="flex flex-col w-full">
-      <div class="flex justify-start items-center gap-3 py-5 px-3 text-primary">
-        <PhCat
-          :size="32"
-          weight="fill"
-        />
+      <div class="flex justify-between items-center gap-3 py-5 px-3 text-primary">
+        <div class="flex itmes-center gap-4">
+          <PhCat
+            :size="32"
+            weight="fill"
+          />
 
-        <p class="text-lg">
-          Cat adoption plataform
-        </p>
+          <p class="text-lg">
+            Cat adoption plataform
+          </p>
+        </div>
+        <nuxt-link
+          class="btn btn-link btn-xs"
+          to="/login"
+        >
+          Admin
+          <PhosphorIconSignIn
+            :size="16"
+            weight="fill"
+          />
+        </nuxt-link>
       </div>
       <hr>
       <div class="px-5">
@@ -52,7 +64,7 @@
             v-for="(cat, index) in cats"
             :key="index"
           >
-            <div class="card bg-base-100 border border-base-200 h-[30rem] shadow-xl max-w-96">
+            <div class="card bg-base-100 border border-base-200 h-[27rem] shadow-xl min-w-72 max-w-96">
               <div class="card-body max-w-96 p-5">
                 <figure
                   :data-tip="cat.isAdopted ? 'This kitten already has a home!': 'This kitten doesn\'t have a home yet! He needs your love'"
