@@ -81,6 +81,7 @@
         </div>
       </div>
     </div>
+    <adoption-success-modal />
   </div>
 </template>
 <script

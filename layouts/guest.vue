@@ -1,6 +1,5 @@
 <template>
   <div>
-    <alert-component />
     <div class="h-screen mx-auto bg-base-100">
       <slot />
     </div>
