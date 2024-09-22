@@ -31,23 +31,30 @@
                   <span class="label-text text-primary font-bold">Image</span>
                 </span>
                 <input
-                  ref="fileInput"
-                  accept="image/*"
-                  class="hidden"
-                  type="file"
-                  @change="handleFileChange"
+                  v-model="form.image"
+                  :class="{ 'is-invalid': errors.image }"
+                  class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300 input-bordered"
+                  placeholder="Enter your full name"
+                  type="text"
                 >
-                <button
-                  class="btn btn-block btn-outline input-bordered flex justify-between font-normal"
-                  type="button"
-                  @click="triggerFileInput"
-                >
-                  <span>{{ selectedFileName || 'Choose Image' }}</span>
-                  <PhosphorIconCamera
-                    :size="25"
-                    weight="fill"
-                  />
-                </button>
+                <!--                <input-->
+                <!--                  ref="fileInput"-->
+                <!--                  accept="image/*"-->
+                <!--                  class="hidden"-->
+                <!--                  type="file"-->
+                <!--                  @change="handleFileChange"-->
+                <!--                >-->
+                <!--                <button-->
+                <!--                  class="btn btn-block btn-outline input-bordered flex justify-between font-normal"-->
+                <!--                  type="button"-->
+                <!--                  @click="triggerFileInput"-->
+                <!--                >-->
+                <!--                  <span>{{ selectedFileName || 'Choose Image' }}</span>-->
+                <!--                  <PhosphorIconCamera-->
+                <!--                    :size="25"-->
+                <!--                    weight="fill"-->
+                <!--                  />-->
+                <!--                </button>-->
                 <span
                   v-if="errors.image"
                   class="label"
