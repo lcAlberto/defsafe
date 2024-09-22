@@ -1,7 +1,12 @@
 <template>
   <div class="">
     <button
+      :class="{'btn-disabled text-gray-500 tooltip': props.disabled}"
+      :disabled="props.disabled"
       class="bg-transparent text-error bg-sweet-danger border border-none rounded-md p-2"
+      data-tip="You cannot delete this cat because he is adopted!"
+      role="button"
+      tabindex="-1"
       @click="toggleModal()"
     >
       <PhosphorIconTrashSimple
@@ -57,22 +62,26 @@
     lang="ts"
     setup
 >
+import {useCatStore} from "~/stores/cats/catsStore";
+
 const props = defineProps({
-  catId: {type: Number, required: true}
+  catId: {type: Number, required: true},
+  disabled: {type: Boolean, default: true},
 })
 
 const open = ref(false)
+const store = useCatStore()
 
 function toggleModal() {
   open.value = !open.value
-  const modalElement = document.getElementById('new-cat-modal')
+  const modalElement = document.getElementById(`delete-cat-${props.catId}`)
   if (modalElement) {
-    document.getElementById(`delete-cat-${props.catId}`).showModal();
+    modalElement.showModal();
   }
 }
 
 function submit() {
-  //
+  store.deleteCat(props.catId)
 }
 </script>
 

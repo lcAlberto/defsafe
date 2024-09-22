@@ -1,5 +1,5 @@
 <template>
-  <aside class="max-w-80 border border-base bg-base-100 h-full">
+  <aside class="w-72 max-w-80 border border-base bg-base-100 h-full">
     <div class="flex justify-start items-center gap-3 py-5 px-3 text-primary">
       <PhCat
         :size="32"

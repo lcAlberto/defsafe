@@ -1,21 +1,24 @@
 <template>
   <div class="">
     <button
-      class="btn btn-primary"
+      class="bg-transparent text-primary bg-sweet-primary border border-none rounded-md p-2"
       @click="toggleModal()"
     >
-      Register New Cat
+      <PhosphorIconPencilSimple
+        :size="15"
+        weight="fill"
+      />
     </button>
     <div>
       <dialog
-        id="new-cat-modal"
+        :id="`${props.catData.id}-edit-cat-modal`"
         class="modal p-5"
       >
         <div class="modal-box w-full sm:w-11/12 md:w-1/2 xl:w-1/3 max-w-5xl">
           <div class="full">
             <div class="">
               <h3 class="text-lg font-bold mb-2">
-                Adoption form
+                Edit {{ props.catData.name }}
               </h3>
               <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-red-500">
@@ -33,7 +36,7 @@
                 <input
                   v-model="form.image"
                   :class="{ 'is-invalid': errors.image }"
-                  class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
+                  class="input input-bordered w-full focus:outline-0 focus:border-primary font-normal placeholder:text-base-300"
                   placeholder="Enter your image"
                   type="text"
                 >
@@ -52,7 +55,7 @@
                 <input
                   v-model="form.name"
                   :class="{ 'is-invalid': errors.name }"
-                  class="input w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
+                  class="input input-bordered w-full focus:outline-0 focus:border-primary font-normal placeholder:text-base-300"
                   placeholder="Enter your full name"
                   type="text"
                 >
@@ -71,7 +74,7 @@
                 <textarea
                   v-model="form.description"
                   :class="{ 'is-invalid': errors.description }"
-                  class="textarea w-full focus:outline-0 focus:border-primary placeholder:text-base-300"
+                  class="textarea input-bordered w-full focus:outline-0 focus:border-primary font-normal placeholder:text-base-300"
                   placeholder="Write here..."
                   rows="5"
                   type="image"
@@ -108,7 +111,20 @@
     lang="ts"
     setup
 >
+import {useCatStore} from "~/stores/cats/catsStore";
+
+const props = defineProps({
+  catData: {type: Object, required: true}
+})
+
+onMounted(() => {
+  if (props.catData) {
+    form.value = props.catData
+  }
+})
+
 const open = ref(false)
+const store = useCatStore()
 
 const form = ref({
   image: '',
@@ -124,14 +140,18 @@ const errors = ref({
 
 function toggleModal() {
   open.value = !open.value
-  const modalElement = document.getElementById('new-cat-modal')
+  const modalElement = document.getElementById(`${props.catData.id}-edit-cat-modal`)
   if (modalElement) {
-    document.getElementById('new-cat-modal').showModal();
+    modalElement.showModal();
   }
 }
 
-function submit() {
-  //
+async function submit() {
+  await store.editCat(form.value, props.catData.id)
+  const modalElement = document.getElementById(`${props.catData.id}-edit-cat-modal`)
+  if (modalElement) {
+    modalElement.close();
+  }
 }
 </script>
 

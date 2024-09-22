@@ -23,6 +23,7 @@
 >
 
 import {PhCat} from "@phosphor-icons/vue";
+import RegisterCatModal from "~/components/cats/RegisterCatModal.vue";
 </script>
 
 
