@@ -9,10 +9,7 @@
       tabindex="-1"
       @click="toggleModal()"
     >
-      <PhosphorIconTrashSimple
-        :size="15"
-        weight="fill"
-      />
+      trash
     </button>
     <div>
       <dialog

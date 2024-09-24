@@ -11,11 +11,6 @@
     </div>
     <div class="md:w-1/2 flex flex-col justify-center items-start gap-3 py-5 px-10">
       <div class="flex items-center gap-4 text-primary mb-5">
-        <PhCat
-          :size="50"
-          weight="fill"
-        />
-
         <p class="text-xl">
           Cat adoption plataform
         </p>
@@ -54,18 +49,6 @@
               class="input border border-0 w-full"
               placeholder="Enter your full name"
             >
-            <PhosphorIconLockSimple
-              v-if="showPassword"
-              :size="24"
-              weight="fill"
-              @click="showPassword = false"
-            />
-            <PhosphorIconLockSimpleOpen
-              v-else
-              :size="24"
-              weight="fill"
-              @click="showPassword = true"
-            />
           </label>
           <span
             v-if="errors.password"
@@ -96,7 +79,6 @@
     lang="ts"
     setup
 >
-import {PhCat} from "@phosphor-icons/vue";
 import {loginFormSchema} from "~/validations/LoginRequestSchemaValidation";
 import {useAuthStore} from "~/stores/auth/authStore";
 

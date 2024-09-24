@@ -9,7 +9,7 @@
           <div class="full">
             <div class="p-5 overflow-auto flex flex-col items-center justify-evenly text-center">
               <span class="text-success mb-5 bg-green-50 p-4 rounded-lg">
-                <PhosphorIconCheck :size="32" />
+                ok
               </span>
               <h3 class="text-lg font-bold my-3">
                 Application Submitted!

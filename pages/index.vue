@@ -3,11 +3,6 @@
     <div class="flex flex-col w-full">
       <div class="flex justify-between items-center gap-3 py-5 px-3 text-primary">
         <div class="flex itmes-center gap-4">
-          <PhCat
-            :size="32"
-            weight="fill"
-          />
-
           <p class="text-lg">
             Cat adoption plataform
           </p>
@@ -17,10 +12,6 @@
           to="/login"
         >
           Admin
-          <PhosphorIconSignIn
-            :size="16"
-            weight="fill"
-          />
         </nuxt-link>
       </div>
       <hr>
@@ -47,10 +38,6 @@
           v-else-if="cats && cats.length === 0"
           class="flex flex-col justify-center items-center text-primary h-[50vh]"
         >
-          <PhosphorIconPawPrint
-            :size="52"
-            weight="fill"
-          />
           <h1 class="text-md">
             Oops! No kittens found
           </h1>
@@ -101,7 +88,6 @@
     setup
 >
 import AdoptModalComponent from "~/components/AdoptModalComponent.vue";
-import {PhCat} from "@phosphor-icons/vue";
 import {useCatStore} from "~/stores/cats/catsStore";
 
 onMounted(() => {

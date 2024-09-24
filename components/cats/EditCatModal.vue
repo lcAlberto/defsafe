@@ -4,10 +4,7 @@
       class="bg-transparent text-primary bg-sweet-primary border border-none rounded-md p-2"
       @click="toggleModal()"
     >
-      <PhosphorIconPencilSimple
-        :size="15"
-        weight="fill"
-      />
+      pen
     </button>
     <div>
       <dialog
