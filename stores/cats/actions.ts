@@ -2,7 +2,7 @@ export const actions = {
   
   async fetchCats() {
     const config = useRuntimeConfig()
-    await $fetch(`${config.public.baseUrl}/cats/cats-with-status`, {
+    await $fetch(`${config.public.apiUrl}/cats/cats-with-status`, {
       method: 'GET'
     }).then((response) => {
       this.cats = response.cats;
@@ -15,7 +15,7 @@ export const actions = {
   
   async createCat(params: object) {
     const config = useRuntimeConfig()
-    await $fetch(`${config.public.baseUrl}/cats/`, {
+    await $fetch(`${config.public.apiUrl}/cats/`, {
       method: 'POST',
       body: params
     }).then((response) => {
@@ -29,7 +29,7 @@ export const actions = {
   
   async editCat(params: object, id: number) {
     const config = useRuntimeConfig()
-    await $fetch(`${config.public.baseUrl}/cats/${id}`, {
+    await $fetch(`${config.public.apiUrl}/cats/${id}`, {
       method: 'PUT',
       body: params
     }).then((response) => {
@@ -43,7 +43,7 @@ export const actions = {
   
   async deleteCat(id: number) {
     const config = useRuntimeConfig()
-    await $fetch(`${config.public.baseUrl}/cats/${id}`, {
+    await $fetch(`${config.public.apiUrl}/cats/${id}`, {
       method: 'DELETE'
     }).then((response) => {
       useNotify('success', 'Cats', `${response.message} || Success!`)

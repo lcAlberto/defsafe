@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('authStore', {
       
       const config = useRuntimeConfig()
       try {
-        await $fetch(`${config.public.baseUrl}/auth/login/`, {
+        await $fetch(`${config.public.apiUrl}/auth/login/`, {
             method: 'POST',
             body: payload
           }
@@ -57,7 +57,7 @@ export const useAuthStore = defineStore('authStore', {
     async logout() {
       const config = useRuntimeConfig()
       try {
-        await $fetch(`${config.public.baseUrl}/auth/logout`,
+        await $fetch(`${config.public.apiUrl}/auth/logout`,
           {
             method: 'POST'
           }).then(() => {

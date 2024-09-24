@@ -24,7 +24,7 @@ export const useAdoptionStore = defineStore('adoptionStore', {
     async adoptCat(param: object, catId: number) {
       const config = useRuntimeConfig()
       const systemStore = useSystemStore()
-      await $fetch(`${config.public.baseUrl}/adopt/${catId}`, {
+      await $fetch(`${config.public.apiUrl}/adopt/${catId}`, {
         method: 'POST',
         body: param
       }).then((response) => {
