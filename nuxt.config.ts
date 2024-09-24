@@ -5,7 +5,6 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxt/fonts",
     "@pinia/nuxt",
-    "nuxt-phosphor-icons",
   ],
   css: ["~/assets/css/main.css"],
   postcss: {
